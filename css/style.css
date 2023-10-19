@@ -1,0 +1,36 @@
+body {
+
+}
+
+.btn-primary, .btn-primary:visited {
+    background-color: #2d2d2d !important;
+    border-color: black !important;
+    position:relative;
+    font-family: sans-serif !important;
+    right:1050px;
+    min-width: 100px;
+    cursor: pointer;
+
+}
+
+.btn-primary:active {
+    background-color: #545457 !important;
+}
+
+.btn-primary:hover {
+    background-color: #464649 !important;
+}
+
+.fs-3 {
+    font-family: sans-serif !important;
+}
+
+.table, .table-striped  {
+    position:relative ;
+    border-color: black !important;
+    min-width: 100px;
+}
+
+
+
+
