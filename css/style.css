@@ -1,5 +1,5 @@
 body {
-
+    font-size: 140%;
 }
 
 .btn-primary, .btn-primary:visited {
@@ -7,7 +7,7 @@ body {
     border-color: black !important;
     position:relative;
     font-family: sans-serif !important;
-    right:1050px;
+
     min-width: 100px;
     cursor: pointer;
 
@@ -25,12 +25,181 @@ body {
     font-family: sans-serif !important;
 }
 
-.table, .table-striped  {
-    position:relative ;
-    border-color: black !important;
-    min-width: 100px;
+.styled-table {
+    border-collapse: collapse !important;
+    margin: 25px 0 !important;
+    font-size: 0.9em !important;
+    margin: 50px auto 0 auto !important;
+    font-family: sans-serif !important;
+    min-width: 1800px !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.styled-table thead tr {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    text-align: left !important;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px !important;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd !important;
+}
+
+.page-link{
+    color: #ffffff !important;
+    background-color: #2d2d2d !important;
+    border-collapse: collapse !important;
+    padding: 10px 10px !important;
+    font-family: Arial Black !important;
+    font-size: 0.9em !important;
+    border-radius: 5px;
+    position: absolute;
+    top: 5px;
+    user-select: none;
+    left: 35px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.page-link2 {
+    color: #050505 !important;
+    background-color: #e5b75d !important;
+    padding: 10px 10px !important;
+    border-radius: 5px;
+    font-family: Arial Black !important;
+    color: #696767 !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+    text-decoration: none !important;
+    user-select: none !important;
+}
+
+.page-link2:active {
+    background-color: #9b7c3b !important;
+    user-select: none !important;
+}
+
+.page-link2:hover {
+    background-color: #c79f4e !important;
+    user-select: none !important;
+}
+
+.page-link-del {
+    background-color: #ffb199 !important;
+    padding: 10px 10px !important;
+    border-radius: 5px;
+    font-family: Arial Black !important;
+    color: #696767 !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+    text-decoration: none !important;
+    user-select: none !important;
+}
+
+.page-link-del:active {
+    background-color: #eca38d !important;
+    user-select: none !important;
+}
+
+.page-link-del:hover {
+    background-color: #f3a891 !important;
+    user-select: none !important;
+}
+
+.page-link:active {
+    background-color: #545457 !important;
+    user-select: none !important;
+}
+
+.page-link a {
+    color: #ffffff !important;
+    text-decoration: none;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid black !important;
+}
+
+.table-sm td {
+    padding: 12px 15px !important;
+    background-color: #f3f3f3; !important;
+    border-bottom: 2px solid #4F4C4CFF !important;
+}
+
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #151515;
+}
+
+.group{
+    border-collapse: collapse !important;
+
+    position:relative !important;
+    padding: 10px 10px !important;
+
 }
 
 
+.label-new {
+    display: flex;
+    width: 180px;
+    margin: 0 auto !important;
+}
+.input-type {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.btn-add {
+    display: flex;
+
+    border-radius: 5px;
+
+    color: #ffffff !important;
+    width: 150px;
+    position:relative !important;
+    margin: 0 auto !important;
+    font-size: 0.9em !important;
+    background-color: #2d2d2d !important;
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.btn-back {
+
+    border-radius: 5px;
+
+    color: #ffffff !important;
+    left: 150px;
+    border-collapse: collapse !important;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 0.9em !important;
+    background-color: #2d2d2d !important;
+    position:relative !important;
+    margin: 0 auto !important;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.title-info {
+    top: 1px;
+    user-select: none;
+    left: 750px;
+
+    position:relative !important;
+    margin: 0 auto !important;
+}
 
 
+.warning {
+    top: 1px;
+    user-select: none;
+    left: 40px;
+    padding: 10px 10px !important;
+    font-family: Arial Black !important;
+    color: #c56565 !important;
+}

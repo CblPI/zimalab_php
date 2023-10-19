@@ -2,16 +2,18 @@
 
 //класс пользователь
 Class User {
+    /*
+        Класс пользователь хранит методы:
+        Получение пользователя по ID              :  getUserByID(Подключение к бд, ID пользователя)
+        Проверка почты на уникальность            :  checkEmail(Подключение к бд,Почта, ID пользователя)
+        Проверка обязательных полей               :  reqFieldCheck(Коллекция с полями Name,LName,Email)
+        Метод для добавления пользователя         :  userAdd(Подключение к бд)
+        Метод для Изменения данных о пользователе :  userEdit(Подключение к бд)
+        Метод для удаления(скрытия) пользователя  :  userDelete(Подключение к бд)
+        Метод для вывода списка пользователя      :  userList(Подключение к бд)
+    */
 
-    private $dbconnect;
-
-
-//    function __construct($dbconnect)
-//    {
-//        $this->dbconnect = $dbconnect;
-//    }
-
-
+    //Метод для получения пользователя по ID
     public function getUserByID($database, $uid) {
         $data = $database->query('SELECT user.id, 
                                 user.first_name, 
@@ -32,7 +34,7 @@ Class User {
 
 
 
-
+    //Метод для проверка почты на уникальность.
     private function checkEmail($database,$email,$uid) {
         $check = 1;
         $checknew = $database->query("SELECT user.email as EMAIL FROM user WHERE user.email = '$email'");
@@ -42,7 +44,7 @@ Class User {
         $checkmain = $checkmain->fetch();
         if(!$checkmain["EMAIL"])
             if($checknew["EMAIL"]) {
-                echo "Введенная почта уже используется";
+                echo "<div class='warning' style='flex'> Введенный адрес электронной почты уже используется!</div>";
                 $check = 0;
         }
         return $check;
@@ -50,12 +52,14 @@ Class User {
 
     //Метод для проверки обязательных полей first_name, last_name, email
     private function reqFieldCheck($arraytocheck) {
+        $err = 1;
         foreach ($arraytocheck as $key => $value) {
             if(!$value) {
-                echo "Поле $key является обязательным!";
-                die();
+                echo "<div class='warning' style='flex'> Поле $key является обязательным!</div>";
+                $err = 0;
             }
         }
+        return $err;
     }
 
     //Метод для добавления нового пользователя.
@@ -73,36 +77,36 @@ Class User {
             $phone3 = $_POST['phone3'];
 
             $check = $this->checkEmail($database,$email,0);
-            if(!$check) die();
-            $uidar = $database->query("SELECT MAX(user.id) AS MAX_ID FROM user");
-            $uidar = $uidar->fetchAll();
-            $uid = $uidar[0]["MAX_ID"] + 1;
+            if($check) {
+                $uidar = $database->query("SELECT MAX(user.id) AS MAX_ID FROM user");
+                $uidar = $uidar->fetchAll();
+                $uid = $uidar[0]["MAX_ID"] + 1;
 
-            $arraytocheck = array(
-                'Имя' => $first_name,
-                'Фамилия' => $last_name,
-                'Почта' => $email
-            );
+                $arraytocheck = array(
+                    'Имя' => $first_name,
+                    'Фамилия' => $last_name,
+                    'Почта' => $email
+                );
 
-            $contenphone = array(
-                1 => $phone1,
-                2 => $phone2,
-                3 => $phone3,
-            );
+                $contenphone = array(
+                    1 => $phone1,
+                    2 => $phone2,
+                    3 => $phone3,
+                );
 
-            $this->reqFieldCheck($arraytocheck);
-
-            $database->exec("INSERT INTO user (first_name, last_name, email, company_name,position)
+                $checkreq = $this->reqFieldCheck($arraytocheck);
+                if ($checkreq) {
+                    $database->exec("INSERT INTO user (first_name, last_name, email, company_name,position)
                 VALUES ('$first_name', '$last_name', '$email', '$company_name', '$position')");
 
-            foreach ($contenphone as $key => $value) {
-                if ($value==NULL) $value = 'Пусто';
-                $database->exec("INSERT INTO phone (uid, phone, number) VALUES ('$uid', '$value', '$key')");
+                    foreach ($contenphone as $key => $value) {
+                        if ($value == NULL) $value = 'Пусто';
+                        $database->exec("INSERT INTO phone (uid, phone, number) VALUES ('$uid', '$value', '$key')");
+                    }
+
+                    header("Location: index.php");
+                }
             }
-
-            header("Location: index.php");
-
-
         }
     }
 
@@ -122,36 +126,36 @@ Class User {
             $phone3= $_POST['phone3'];
 
             $check = $this->checkEmail($database,$email,$uid);
-            if(!$check) die();
-            $contente = array(
-                            'first_name' => $first_name,
-                            'last_name' => $last_name,
-                            'email' => $email,
-                            'company_name' => $company_name,
-                            'position' => $position
+            if($check) {
+                $contente = array(
+                                'first_name' => $first_name,
+                                'last_name' => $last_name,
+                                'email' => $email,
+                                'company_name' => $company_name,
+                                'position' => $position
 
-            );
-            $contenphone = array(
-                                1 => $phone1,
-                                2 => $phone2,
-                                3 => $phone3,
-            );
+                );
+                $contenphone = array(
+                                    1 => $phone1,
+                                    2 => $phone2,
+                                    3 => $phone3,
+                );
 
-            foreach ($contente as $key => $value) {
-                if ($value!=NULL) {
-                        $database->exec("UPDATE user SET $key='$value' WHERE user.id='$uid'");
+                foreach ($contente as $key => $value) {
+                    if ($value!=NULL) {
+                            $database->exec("UPDATE user SET $key='$value' WHERE user.id='$uid'");
+                    }
+                    unset($value,$key);
                 }
-                unset($value,$key);
-            }
 
-            foreach ($contenphone as $key => $value) {
-                if ($value!=NULL) {
-                    $database->exec("UPDATE phone SET phone='$value' WHERE uid = '$uid' and number = '$key'");
+                foreach ($contenphone as $key => $value) {
+                    if ($value!=NULL) {
+                        $database->exec("UPDATE phone SET phone='$value' WHERE uid = '$uid' and number = '$key'");
+                    }
+                    unset($value,$key);
                 }
-                unset($value,$key);
+                header("Location: index.php");
             }
-
-            header("Location: index.php");
         }
     }
 

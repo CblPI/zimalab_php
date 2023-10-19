@@ -51,14 +51,12 @@
         $page = $datad["page"];
         $elem_count = $datad["elem_count"]
 
-
-
 ?>
 
-
-<table id="tableu" class="table table-striped table-sm">
+<table id="tableu" class="styled-table ">
     <tbody>
-        <tr>
+    <a type="button" style="position: absolute; top: 85px; left: 35px" class="btn btn-primary active d-block mr-auto text-white" href="/?add=1">New</a>
+        <tr class="active-row">
             <td>id</td>
             <td>Name</td>
             <td>Last name</td>
@@ -84,8 +82,9 @@
             <td><?= $data[$num]["phone1"] ?></td>
             <td><?= $data[$num]["phone2"] ?></td>
             <td><?= $data[$num]["phone3"] ?></td>
-            <td><a href="\?edit=<?=$data[$num]["id"]?>">Edit</a></td>
-            <td><a href="\?del=<?=$data[$num]["id"]?>">Delete</a></td>
+
+            <td><a class="page-link2" href="\?edit=<?=$data[$num]["id"]?>">Edit</a></td>
+            <td><a class="page-link-del" href="\?del=<?=$data[$num]["id"]?>">Delete</a></td>
         </tr>
 
     <? } endfor; ?>

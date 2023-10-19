@@ -1,5 +1,7 @@
 <?php
-
+/*
+    Файл с функцией установки соединения с БД.
+*/
 function dbconnect(){
     include("db_env.php");
     $dbroute = $type.":host=".$host.";dbname=".$base;
